@@ -7,7 +7,7 @@ import { FaBars, FaLaptop, FaMoon, FaShoppingCart, FaUser } from 'react-icons/fa
 const Header = () => {
   return (
    <>
-   <header className='flex justify-between py-4 shadow px-10 sticky top-0'>
+   <header className='flex  justify-between z-20 py-2 md:py-4 shadow md:px-10 px-5 backdrop-blur-md bg-white sticky top-0'>
     <h1 className='text-primary  font-semibold'><Link className='flex  items-center' href={HOME_ROUTE}><FaLaptop/> eTech</Link></h1>
     <nav className='md:flex hidden gap-8'>
         {
