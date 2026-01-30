@@ -3,7 +3,7 @@ import React, { Children } from 'react'
 
 const layout = ({children}) => {
   return (
-    <div><ProductsBanner/>{children}</div>
+    <div className='py-2'><ProductsBanner/>{children}</div>
   )
 }
 
