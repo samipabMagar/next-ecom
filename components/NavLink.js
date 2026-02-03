@@ -9,7 +9,7 @@ const NavLink = () => {
   const pathname = usePathname();
   return (
     <>
-      <nav className="md:flex hidden gap-8">
+      <nav className="md:flex hidden gap-12">
         {navLinks.map((link) => {
         //   const isHome = link.route === HOME_ROUTE;
         //   const isActive = isHome

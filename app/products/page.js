@@ -4,6 +4,7 @@ import axios from "axios";
 import React from "react";
 
 
+
 export const metadata = {
   title: "Products | | eTech",
 };
@@ -17,10 +18,12 @@ const ProductPage = async () => {
   }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
+   
       {products.map((product) => {
         return (
           <ProductCard
             key={product._id}
+            _id = {product._id}
             name={product.name}
             brand={product.brand}
             category={product.category}
