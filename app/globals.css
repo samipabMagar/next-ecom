@@ -7,7 +7,7 @@
   --secondary: #1e40af;
 }
 body {
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 @theme {
   --color-background: var(--background);
@@ -15,4 +15,12 @@ body {
 
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+}
+
+@font-face {
+  font-family:"Poppins" ;
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype"),
+  url("/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

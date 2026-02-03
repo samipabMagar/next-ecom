@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={``}>
         <Header/>
-        <div className="md:px-15 px-5">{children}</div>
+        <div className="md:px-15 px-5 min-h-screen">{children}</div>
         <Footer/>
         </body>
     </html>

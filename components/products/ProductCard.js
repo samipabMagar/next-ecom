@@ -7,8 +7,8 @@ import { FaShoppingCart } from "react-icons/fa";
 const ProductCard = ({ _id, name, brand, price, category, imageUrls }) => {
   return (
     <>
-      <div className="bg-white shadow rounded-xl  mt-5 py-2 px-4">
-        <div className="h-52 group relative">
+      <div className="bg-white shadow-md hover:shadow-xl cursor-pointer  rounded-xl hover:scale-[103%] transition-transform duration-150 py-2 px-4">
+        <div className="h-40 group relative">
           <Link href={`${PRODUCT_ROUTE}/${_id}`}>
             {" "}
             {imageUrls && imageUrls.length > 0 && (
@@ -22,9 +22,9 @@ const ProductCard = ({ _id, name, brand, price, category, imageUrls }) => {
               />
             )}
           </Link>
-          <span className="absolute top-5 right-3 text-white bg-primary text-xs py-1 px-1 rounded-full">{brand}</span>
+          <span className="absolute top-5 right-3 text-white bg-teal-600 text-xs py-1 px-1 rounded-full">{brand}</span>
         </div>
-        {/* <h2>{brand}</h2> */}
+       
         <div className="flex flex-col gap-1 mt-5">
           <Link href={`${PRODUCT_ROUTE}/${_id}`}>
             <h2 className="text-xl font-semibold hover:text-primary">{name}</h2>
