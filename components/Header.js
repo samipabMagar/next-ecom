@@ -13,7 +13,7 @@ import NavLink from "./NavLink";
 const Header = () => {
   return (
     <>
-      <header className="flex  justify-between items-center z-20 py-2 md:py-4 shadow md:px-15 px-5 backdrop-blur-md bg-white sticky top-0">
+      <header className="flex  justify-between items-center z-20 py-2 md:py-2 shadow md:px-15 px-5 backdrop-blur-md bg-white sticky top-0">
         <h1 className="text-primary text-xl  font-semibold">
           <Link className="flex  items-center" href={HOME_ROUTE}>
             <FaLaptop /> eTech
