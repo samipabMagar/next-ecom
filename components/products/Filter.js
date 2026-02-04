@@ -50,7 +50,7 @@ const ProductFilter = () => {
   };
 
   return (
-    <aside className="shadow-md py-4 px-6 rounded-xl sticky top-15 h-fit">
+    <aside className="shadow-md py-4 px-6 rounded-xl md:sticky md:top-16 h-fit w-full">
       <h1 className="text-xl font-semibold mb-2"> Products Filter</h1>
       <div>
         <h4 className="font-medium">Search Products:</h4>
