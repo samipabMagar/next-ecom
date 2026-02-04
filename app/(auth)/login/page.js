@@ -1,17 +1,23 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { REGISTER_ROUTE } from "@/constants/routes";
 import Logo from "@/components/Logo";
 import { useForm } from "react-hook-form";
+import { login } from "@/api/auth";
 
 const page = () => {
-  const { register, handleSubmit , reset} = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  const submitForm = (data) => {
-    console.log(data);
-    reset();
-  }
+  const submitForm = async (data) => {
+    try {
+      const result = await login(data);
+      console.log(result)
+      localStorage.setItem("authToken", result.token);
+    } catch (error) {
+      console.log("Login failed", error.response.data);
+    }
+  };
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-96 gap-5">
@@ -25,7 +31,7 @@ const page = () => {
           <div className="mt-10">
             <label className="font-medium">Email</label>
             <input
-            {...register("email")}
+              {...register("email")}
               placeholder="Please enter your email"
               className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-3 w-full"
               required
@@ -35,7 +41,7 @@ const page = () => {
           <div className="mt-6">
             <label className="font-medium">Password</label>
             <input
-            {...register("password")}
+              {...register("password")}
               placeholder="Please enter your password"
               className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-3 w-full"
               required
