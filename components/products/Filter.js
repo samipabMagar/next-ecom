@@ -50,7 +50,7 @@ const ProductFilter = () => {
   };
 
   return (
-    <aside className="shadow-md py-4 px-6 rounded-xl md:sticky md:top-16 h-fit w-full">
+    <aside className="shadow-md dark:bg-gray-800  py-4 px-6 rounded-xl md:sticky md:top-16 h-fit w-full">
       <h1 className="text-xl font-semibold mb-2"> Products Filter</h1>
       <div>
         <h4 className="font-medium">Search Products:</h4>
@@ -66,7 +66,7 @@ const ProductFilter = () => {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="text-gray-800 outline-0 rounded-md w-full border-gray-300 border px-2 py-1"
+          className="text-gray-800 dark:text-white outline-0 rounded-md w-full border-gray-300 border px-2 py-1"
           name="sort"
         >
           <option value={JSON.stringify({ createdAt: -1 })}>Latest</option>
@@ -83,20 +83,20 @@ const ProductFilter = () => {
       </div>
       <div>
         <h4 className="mb-1 mt-2">Price Range:</h4>
-        <label className="text-xs text-gray-700">Minimum price:</label>
+        <label className="text-xs text-gray-700 dark:text-white">Minimum price:</label>
         <input
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
           type="number"
-          className="outline-0  w-full text-gray-800 border-gray-300 border rounded-md my-1 px-2 py-1"
+          className="outline-0 dark:text-white w-full text-gray-800 border-gray-300 border rounded-md my-1 px-2 py-1"
           name="min"
         />
-        <label className="text-xs text-gray-700">Maximum price:</label>
+        <label className="text-xs dark:text-white text-gray-700">Maximum price:</label>
         <input
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
           type="number"
-          className="outline-0 w-full  text-gray-800  border-gray-300 border rounded-md my-1 px-2 py-1"
+          className="outline-0 dark:text-white w-full  text-gray-800  border-gray-300 border rounded-md my-1 px-2 py-1"
           name="max"
         />
       </div>
@@ -106,13 +106,13 @@ const ProductFilter = () => {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="text-gray-800 outline-0 rounded-md w-full border-gray-300 border px-2 py-1"
+          className="text-gray-800 dark:text-white dark:bg-gray-800 outline-0 rounded-md w-full border-gray-300 border px-2 py-1"
           name="sort"
         >
-          <option value={""}>Select category</option>
-          <option value={"Smartphones"}>Smartphones</option>
-          <option value={"Laptops"}>Laptops</option>
-          <option value={"Smartwatches"}>Smartwatches</option>
+          <option  value={""}>Select category</option>
+          <option  value={"Smartphones"}>Smartphones</option>
+          <option  value={"Laptops"}>Laptops</option>
+          <option  value={"Smartwatches"}>Smartwatches</option>
         </select>
       </div>
 
@@ -126,7 +126,7 @@ const ProductFilter = () => {
             onChange={() => handleBrandChange("Apple")}
             type="checkbox"
           />
-          <label className="text-sm text-gray-700">Apple</label>
+          <label className="text-sm dark:text-white text-gray-700">Apple</label>
         </div>
         <div className="flex gap-2 items-center mb-2">
           <input
@@ -135,7 +135,7 @@ const ProductFilter = () => {
             name="Google"
             type="checkbox"
           />
-          <label className="text-sm text-gray-700">Google</label>
+          <label className="text-sm dark:text-white text-gray-700">Google</label>
         </div>
         <div className="flex gap-2 items-center mb-2">
           <input
@@ -144,7 +144,7 @@ const ProductFilter = () => {
             name="Samsung"
             type="checkbox"
           />
-          <label className="text-sm text-gray-700">Samsung</label>
+          <label className="text-sm dark:text-white text-gray-700">Samsung</label>
         </div>
       </div>
 

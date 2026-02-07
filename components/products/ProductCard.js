@@ -7,17 +7,17 @@ import { FaShoppingCart } from "react-icons/fa";
 const ProductCard = ({ _id, name, brand, price, category, imageUrls }) => {
   return (
     <>
-      <div className="bg-white shadow-md hover:shadow-xl cursor-pointer max-h-80  rounded-xl hover:scale-[103%] transition-transform duration-150 py-2 px-4">
-        <div className="h-40 group relative">
+      <div className="bg-white dark:bg-gray-800 shadow-md hover:shadow-xl cursor-pointer max-h-80  rounded-xl hover:scale-[103%] transition-transform duration-150 py-2 px-4">
+        <div className="h-35 group relative">
           <Link href={`${PRODUCT_ROUTE}/${_id}`}>
             {" "}
             {imageUrls && imageUrls.length > 0 && (
               <Image
-                className="object-contain h-full group-hover:scale-105 transform transition
+                className="object-cover  h-full  group-hover:scale-105 transform transition
             "
                 src={imageUrls[0]}
-                width={400}
-                height={400}
+                width={800}
+                height={900}
                 alt="img"
               />
             )}

@@ -24,3 +24,14 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+
+.dark {
+  --background: #0f172a;
+  --foreground: #e5e7eb;
+  --primary: #60a5fa;
+  --secondary: #93c5fd;
+}
+
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+

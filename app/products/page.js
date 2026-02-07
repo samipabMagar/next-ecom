@@ -10,7 +10,7 @@ const ProductPage = async ({ searchParams }) => {
   const products = await getProducts(searchParams);
 
   return (
-    <section className="grid mt-8 grid-cols-1 md:grid-cols-[1fr_4fr] gap-8">
+    <section className="grid mt-8 grid-cols-1 pb-10 md:grid-cols-[1fr_4fr] gap-8">
       <Filter />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
         {products.length == 0 ? (

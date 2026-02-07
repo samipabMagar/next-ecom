@@ -8,7 +8,7 @@ import navLinks from "@/constants/navlinks";
 
 const Footer = () => {
   return (
-    <footer className="mt-5 px-10   w-full bg-gray-800 text-white py-5 ">
+    <footer className=" px-10 dark:bg-gray-950  w-full bg-gray-800 text-white py-5 ">
       <menu className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-15">
         <div>
           <h1>

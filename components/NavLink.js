@@ -9,7 +9,7 @@ const NavLink = () => {
   const pathname = usePathname();
   return (
     <>
-      <nav className="md:flex hidden gap-12">
+      <nav className="md:flex hidden  gap-12">
         {navLinks.map((link) => {
         //   const isHome = link.route === HOME_ROUTE;
         //   const isActive = isHome
@@ -18,7 +18,7 @@ const NavLink = () => {
         const isActive = pathname ===link.route || (link.route !== HOME_ROUTE && pathname.startsWith(link.route));
           return (
             <Link
-              className={`text-gray-700 ${isActive ? "text-primary" : ""}  font-semibold  hover:text-primary`}
+              className={`text-gray-700  ${isActive ? "text-primary " : ""} dark:text-white font-semibold  hover:text-primary`}
               key={link.route}
               href={link.route}
             >
