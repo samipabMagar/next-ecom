@@ -5,18 +5,15 @@ import { REGISTER_ROUTE } from "@/constants/routes";
 import Logo from "@/components/Logo";
 import { useForm } from "react-hook-form";
 import { login } from "@/api/auth";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/redux/auth/authActions";
 
 const page = () => {
   const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
 
   const submitForm = async (data) => {
-    try {
-      const result = await login(data);
-      console.log(result)
-      localStorage.setItem("authToken", result.token);
-    } catch (error) {
-      console.log("Login failed", error.response.data);
-    }
+    dispatch(loginUser(data));
   };
   return (
     <div className="flex  items-center justify-center w-full px-4">
