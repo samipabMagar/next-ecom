@@ -3,7 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 const userPreferenceSlice = createSlice({
   name: "userPreferences",
   initialState: {
-    theme: "dark",
+    theme: "light",
   },
   reducers: {
     toggleTheme: (state) => {

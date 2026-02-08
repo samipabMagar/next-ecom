@@ -1,13 +1,18 @@
-"use client"
-const { store } = require("@/redux/store")
-const { Provider } = require("react-redux")
+"use client";
 
- const ReduxProvider = ({children}) => {
-    return (
-        <Provider store={store} >
-            {children}
-        </Provider>
-    )
- }
+import { PersistGate } from "redux-persist/integration/react";
 
- export default ReduxProvider
+import { store, persistor } from "@/redux/store";
+import { Provider } from "react-redux";
+
+const ReduxProvider = ({ children }) => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
+};
+
+export default ReduxProvider;
