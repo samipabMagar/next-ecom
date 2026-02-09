@@ -1,4 +1,4 @@
-const Spinner = ({ className = "w-8 h-8 fill-primary" }) => {
+const Spinner = ({ className = "w-8 h-6 fill-primary" }) => {
   return (
     <div>
       <svg

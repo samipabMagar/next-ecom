@@ -5,12 +5,15 @@ import { REGISTER_ROUTE } from "@/constants/routes";
 import Logo from "@/components/Logo";
 import { useForm } from "react-hook-form";
 import { login } from "@/api/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/redux/auth/authActions";
+import Spinner from "@/components/Spinner";
 
 const page = () => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
+
+  const {loading, user, error} = useSelector((state) => state.authReducer);
 
   const submitForm = async (data) => {
     dispatch(loginUser(data));
@@ -47,9 +50,10 @@ const page = () => {
           </div>
           <button
             type="submit"
-            className="mt-8 py-3 w-full cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700"
+            disabled={loading}
+            className="mt-8 flex items-center justify-evenly py-3 w-full  cursor-pointer disabled:opacity-70 rounded-md bg-primary text-white transition hover:bg-blue-700"
           >
-            Login
+            Login {loading && <Spinner />}
           </button>
           <p className="text-center py-8">
             Don&apos;t have an account?

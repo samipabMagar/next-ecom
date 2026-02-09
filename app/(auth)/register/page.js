@@ -1,35 +1,32 @@
-"use client"
+"use client";
 import React from "react";
 import { LOGIN_ROUTE } from "@/constants/routes";
 import Link from "next/link";
-import { signUp } from "@/api/auth";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { registerUser } from "@/redux/auth/authActions";
 
 const page = () => {
-  const {register, handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
-  const submitForm = async(data) => {
-    try{
-      const result = await signUp(data);
-      localStorage.setItem("authToken", result.token);
-    }catch(error) {
-      console.log("Registration failed", error.response.data);
-    }
-    
-  }
+  const submitForm = async (data) => {
+    dispatch(registerUser(data));
+  };
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-xl gap-2">
-        
         <form onSubmit={handleSubmit(submitForm)}>
-          <h2 className="md:text-4xl text-xl font-medium text-gray-900">Sign up</h2>
-          
+          <h2 className="md:text-4xl text-xl font-medium text-gray-900">
+            Sign up
+          </h2>
+
           <div className="flex gap-5">
             {" "}
             <div className="md:mt-4  mt-3">
               <label className="font-medium">Name</label>
               <input
-              {...register("name")}
+                {...register("name")}
                 placeholder="Full name"
                 className="md:mt-2 mt-1 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
                 required
@@ -39,7 +36,7 @@ const page = () => {
             <div className="md:mt-4 mt-3">
               <label className="font-medium">Email</label>
               <input
-              {...register("email")}
+                {...register("email")}
                 placeholder="Email"
                 className="md:mt-2 mt-1 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
                 required
@@ -50,7 +47,7 @@ const page = () => {
           <div className="md:mt-4 mt-3">
             <label className="font-medium">Phone number</label>
             <input
-            {...register("phone")}
+              {...register("phone")}
               placeholder="Please enter your phone number"
               className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
               required
@@ -61,14 +58,14 @@ const page = () => {
             <label className="font-medium">Address</label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input
-              {...register("city")}
+                {...register("city")}
                 placeholder="Please enter your city"
                 className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
                 required
                 type="text"
               />
               <input
-              {...register("province")}
+                {...register("province")}
                 placeholder="Please enter your province"
                 className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
                 required
