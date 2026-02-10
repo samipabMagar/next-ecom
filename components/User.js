@@ -12,7 +12,7 @@ const User = () => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-  if(!user) return <Link className="py-2 px-6 bg-primary text-white rounded-lg" href={LOGIN_ROUTE}>Login</Link>
+  if(!user) return <Link className="py-1 px-4 bg-primary text-white rounded-lg" href={LOGIN_ROUTE}>Login</Link>
   return (
     <div className="relative">
       <button

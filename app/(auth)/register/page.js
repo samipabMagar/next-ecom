@@ -7,22 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "@/redux/auth/authActions";
 import Spinner from "@/components/Spinner";
 import { toast } from "react-toastify";
+import PasswordInput from "@/components/form/PasswordInput";
 
 const page = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const {loading, error} = useSelector((state) => state.authReducer);
+  const { loading, error } = useSelector((state) => state.authReducer);
 
   const submitForm = async (data) => {
     dispatch(registerUser(data));
   };
 
   useEffect(() => {
-    if(error) {
-      toast.error(error); 
+    if (error) {
+      toast.error(error);
     }
-  }, [error])
+  }, [error]);
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-xl gap-2">
@@ -85,13 +86,7 @@ const page = () => {
           </div>
           <div className="md:mt-4 mt-3">
             <label className="font-medium">Password</label>
-            <input
-              placeholder="Please enter your password"
-              className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-2 md:py-3 w-full"
-              required
-              type="password"
-              {...register("password")}
-            />
+            <PasswordInput {...register("password")} />
           </div>
           <div className="flex md:gap-3 gap-2 md:mt-5 mt-3 justify-center items-center ">
             {" "}
@@ -99,7 +94,7 @@ const page = () => {
               type="submit"
               className="flex justify-evenly items-center py-2 md:py-3 w-full flex-3 md:flex-4 cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700"
             >
-              Register {loading && <Spinner/>}
+              Register {loading && <Spinner />}
             </button>
             <p className="text-center flex-5  md:flex-4 ">
               Already have an account?
