@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { REGISTER_ROUTE } from "@/constants/routes";
 import Logo from "@/components/Logo";
@@ -8,6 +8,7 @@ import { login } from "@/api/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/redux/auth/authActions";
 import Spinner from "@/components/Spinner";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -18,12 +19,16 @@ const page = () => {
   const submitForm = async (data) => {
     dispatch(loginUser(data));
   };
+
+  useEffect(() => {
+    toast.error(error);
+  },[error])
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-96 gap-5">
         <Logo />
         <form onSubmit={handleSubmit(submitForm)}>
-          <h2 className="text-4xl font-medium text-gray-900">Sign in</h2>
+          <h2 className="text-4xl font-medium text-gray-900 dark:text-gray-300">Sign in</h2>
           <p className="mt-4 text-base text-gray-500/90">
             Please enter email and password to access.
           </p>

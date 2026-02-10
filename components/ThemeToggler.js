@@ -9,8 +9,8 @@ const ThemeToggler = () => {
     const dispatch = useDispatch();
   return (
     <button onClick={()=>dispatch(toggleTheme())} className="text-gray-700 dark:text-white hover:text-primary cursor-pointer">
-      <FaMoon className="dark:hidden"/>
-      <FaSun className="hidden dark:block"/>
+      <FaMoon className="dark:hidden text-lg"/>
+      <FaSun className="hidden dark:block text-lg"/>
     </button>
   );
 };

@@ -1,23 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { LOGIN_ROUTE } from "@/constants/routes";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "@/redux/auth/authActions";
+import Spinner from "@/components/Spinner";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
+  const {loading, error} = useSelector((state) => state.authReducer);
+
   const submitForm = async (data) => {
     dispatch(registerUser(data));
   };
+
+  useEffect(() => {
+    if(error) {
+      toast.error(error); 
+    }
+  }, [error])
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-xl gap-2">
         <form onSubmit={handleSubmit(submitForm)}>
-          <h2 className="md:text-4xl text-xl font-medium text-gray-900">
+          <h2 className="md:text-4xl text-xl font-medium dark:text-gray-200 text-gray-900">
             Sign up
           </h2>
 
@@ -87,9 +97,9 @@ const page = () => {
             {" "}
             <button
               type="submit"
-              className=" py-2 md:py-3 w-full flex-3 md:flex-4 cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700"
+              className="flex justify-evenly items-center py-2 md:py-3 w-full flex-3 md:flex-4 cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700"
             >
-              Register
+              Register {loading && <Spinner/>}
             </button>
             <p className="text-center flex-5  md:flex-4 ">
               Already have an account?
