@@ -1,39 +1,71 @@
 "use client";
+import { addProduct } from "@/api/products";
+import Spinner from "@/components/Spinner";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
-import { FaTimes } from "react-icons/fa";
+import { FaPlus, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const [selectedImages, setSelectedImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     setSelectedImages((prevImages) => [...prevImages, ...acceptedFiles]);
-  },[]);
+  }, []);
 
   const { register, handleSubmit } = useForm();
 
-  const {
-    getRootProps,
-    getInputProps,
-    acceptedFiles,
-    fileRejections,
-  } = useDropzone({
-    onDrop: onDrop,
-    accept: {
-      "image/jpeg": [".jpeg", ".jpg"],
-      "image/png": [".png"],
-    },
-    maxFiles: 5,
-    maxSize: 5 * 1024 * 1024, // 5MB
-  });
-  
+  const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
+    useDropzone({
+      onDrop: onDrop,
+      accept: {
+        "image/jpeg": [".jpeg", ".jpg"],
+        "image/png": [".png"],
+      },
+      maxFiles: 5,
+      maxSize: 5 * 1024 * 1024, // 5MB
+    });
+
   const removeImage = (index) => {
     setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  }
+  };
+
+  const submitForm = async (data) => {
+    // console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("brand", data.brand);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    formData.append("stock", data.stock ?? 1);
+    if (data.description) formData.append("description", data.description);
+
+    if (selectedImages.length > 0) {
+      selectedImages.map((image) => {
+        formData.append("images", image);
+      });
+    }
+
+    try {
+      setLoading(true);
+      await addProduct(formData);
+      toast.success("Product added successfully");
+      router.back();
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response?.data?.message || "Failed to add product");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(submitForm)}>
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div className="sm:col-span-2">
           <label
@@ -80,6 +112,7 @@ const Form = () => {
             className="bg-gray-50 border outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-3 focus:ring-primary/50 outline-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
             placeholder="Rs. 10000"
             required
+            {...register("price")}
           />
         </div>
         <div>
@@ -170,7 +203,11 @@ const Form = () => {
                       {Math.round(image.size / 1024)} KB
                     </span>
                   </div>
-                  <button onClick={() => removeImage(index)} type="button" className="cursor-pointer bg-red-500 text-white p-2 rounded">
+                  <button
+                    onClick={() => removeImage(index)}
+                    type="button"
+                    className="cursor-pointer bg-red-500 text-white p-2 rounded"
+                  >
                     {" "}
                     <FaTimes className="" />
                   </button>
@@ -192,6 +229,7 @@ const Form = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-3 focus:ring-primary/50 outline-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
             placeholder="Your description here"
             defaultValue={""}
+            {...register("description")}
           />
         </div>
       </div>
@@ -200,6 +238,7 @@ const Form = () => {
         className="disabled:opacity-80 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-600 cursor-pointer"
       >
         <span className="mr-2">Add product</span>
+        {loading ? <Spinner className="h-5 w-5 fill-primary" /> : <FaPlus />}
       </button>
     </form>
   );

@@ -1,8 +1,12 @@
+import Link from 'next/link'
 import React from 'react'
 
 const ProductManagementPage = () => {
   return (
-    <div>ProductManagementPage</div>
+    <div>
+      <h2>ProductManagementPage</h2>
+      <Link href={"product-management/add"}> Add Product</Link>
+    </div>
   )
 }
 
