@@ -1,21 +1,27 @@
 "use client";
+import Sidebar from "@/components/admin/Sidebar";
 import Spinner from "@/components/Spinner";
 import { LOGIN_ROUTE } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const AdminLayout = ({ children }) => {
+const ClientLayout = ({ children }) => {
   const { user } = useSelector((state) => state.authReducer);
-  const router =  useRouter();
+  const router = useRouter();
 
   useEffect(() => {
-    if(!user) {
-        router.push(LOGIN_ROUTE);
+    if (!user) {
+      router.push(LOGIN_ROUTE);
     }
-  },[user])
+  }, [user]);
   if (user) {
-    return <div>{children}</div>;
+    return (
+      <div>
+        <Sidebar />
+        <div className="sm:ml-64 p-5">{children}</div>
+      </div>
+    );
   }
   return (
     <div className="flex py-25 items-center justify-center">
@@ -24,4 +30,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default ClientLayout;
