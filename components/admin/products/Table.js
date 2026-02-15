@@ -1,9 +1,9 @@
 import { FaImage, FaPencilAlt } from "react-icons/fa";
-// import { format } from "date-fns";
+import { format } from "date-fns";
 import { PRODUCT_MANAGEMENT_ROUTE } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
-// import DeleteProduct from "./Delete";
+import DeleteProduct from "./Delete";
 import TableHeader from "./TableHeader";
 
 const ProductsTable = ({ products }) => {
@@ -53,7 +53,7 @@ const ProductsTable = ({ products }) => {
                 </div>
               </td>
               <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {/* {format(product.createdAt, "dd MMM, yyyy")} */}
+                {format(product.createdAt, "dd MMM, yyyy")}
               </td>
               <td className="flex items-center justify-center gap-2 px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <Link
@@ -62,7 +62,7 @@ const ProductsTable = ({ products }) => {
                 >
                   <FaPencilAlt />
                 </Link>
-                {/* <DeleteProduct id={product._id} /> */}
+                <DeleteProduct id={product._id} />
               </td>
             </tr>
           ))}

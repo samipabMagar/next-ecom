@@ -1,11 +1,13 @@
 import { FaUpload } from "react-icons/fa";
 import Link from "next/link";
-import ProductsTable from "@/components/admin/products/Table";
 
 import { getProducts } from "@/api/products";
+import Pagination from "@/components/admin/products/Pagination";
+import ProductsTable from "@/components/admin/products/Table";
 
-const ProductManagementPage = async({searchParams}) => {
+const ProductManagementPage = async ({ searchParams }) => {
   const products = await getProducts(searchParams);
+
   return (
     <section className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
       <div className="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
@@ -36,7 +38,8 @@ const ProductManagementPage = async({searchParams}) => {
           </button>
         </div>
       </div>
-      <ProductsTable products={products}/>
+      <ProductsTable products={products} />
+      <Pagination />
     </section>
   );
 };

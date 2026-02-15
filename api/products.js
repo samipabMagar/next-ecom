@@ -21,6 +21,32 @@ export const addProduct = async (formData) => {
     headers: { Authorization: `Bearer ${authToken}` },
   });
 
-//   console.log(response);
-return response
+  //   console.log(response);
+  return response;
 };
+
+export const getProductById = async (id) => {
+  const response = await axios.get(`${config.apiUrl}/api/products/${id}`);
+  return response.data;
+};
+
+export const updateProduct = async (id, data) => {
+  const authToken = localStorage.getItem("authToken");
+  const response = await axios.put(
+    `${config.apiUrl}/api/products/${id}`,
+    data,
+    {
+      headers: { Authorization: `Bearer ${authToken}` },
+    },
+  );
+  return response.data;
+};
+
+export const deleteProduct = async(id) => {
+  const authToken = localStorage.getItem("authToken");
+  const response = await axios.delete(`${config.apiUrl}/api/products/${id}`, {
+    headers: {Authorization: `Bearer ${authToken}`}
+  })
+
+  return response.data;
+}

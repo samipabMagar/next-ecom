@@ -1,5 +1,5 @@
 "use client";
-import { addProduct } from "@/api/products";
+import { addProduct, updateProduct } from "@/api/products";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-const Form = () => {
+const Form = ({ product }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -18,7 +18,15 @@ const Form = () => {
     setSelectedImages((prevImages) => [...prevImages, ...acceptedFiles]);
   }, []);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    values: {
+      name: product?.name || "",
+      brand: product?.brand || "",
+      price: product?.price || "",
+      category: product?.category || "",
+      stock: product?.stock || "",
+    },
+  });
 
   const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
     useDropzone({
@@ -53,9 +61,15 @@ const Form = () => {
 
     try {
       setLoading(true);
-      await addProduct(formData);
-      toast.success("Product added successfully");
-      router.back();
+      if (product) {
+        await updateProduct(product._id, formData);
+        toast.success("Product updated successfully");
+      } else {
+        await addProduct(formData);
+        toast.success("Product added successfully");
+      }
+      router.push("/product-management");
+      router.refresh();
     } catch (error) {
       setLoading(false);
       toast.error(error.response?.data?.message || "Failed to add product");
@@ -237,7 +251,9 @@ const Form = () => {
         type="submit"
         className="disabled:opacity-80 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-600 cursor-pointer"
       >
-        <span className="mr-2">Add product</span>
+        <span className="mr-2">
+          {product ? "Update Product" : "Add product"}
+        </span>
         {loading ? <Spinner className="h-5 w-5 fill-primary" /> : <FaPlus />}
       </button>
     </form>
