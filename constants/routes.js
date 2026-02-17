@@ -5,6 +5,9 @@ export const CONTACT_ROUTE = '/contact';
 export const LOGIN_ROUTE = '/login';
 export const REGISTER_ROUTE = '/register';
 
+export const PROFILE_ROUTE = '/profile';
+export const CART_ROUTE = '/cart';
+
 //Admin Routes
 export const ADMIN_DASHBOARD_ROUTE = '/dashboard';
 export const PRODUCT_MANAGEMENT_ROUTE = '/product-management';
