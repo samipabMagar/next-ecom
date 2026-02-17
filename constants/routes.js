@@ -7,6 +7,7 @@ export const REGISTER_ROUTE = '/register';
 
 export const PROFILE_ROUTE = '/profile';
 export const CART_ROUTE = '/cart';
+export const ORDERS_ROUTE = '/orders';
 
 //Admin Routes
 export const ADMIN_DASHBOARD_ROUTE = '/dashboard';

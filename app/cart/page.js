@@ -1,19 +1,25 @@
 "use client";
 
 import { FaMinus, FaPlus, FaRegHeart, FaXmark } from "react-icons/fa6";
-import { PRODUCT_ROUTE } from "@/constants/routes";
+import { ORDERS_ROUTE, PRODUCT_ROUTE } from "@/constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaImage } from "react-icons/fa";
 import {
+  clearCart,
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
 } from "@/redux/cart/cartSlice";
+import { createOrder } from "@/api/orders";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const CartPage = () => {
   const { products, totalPrice } = useSelector((state) => state.cartReducer);
+  const { user } = useSelector((state) => state.authReducer);
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -23,6 +29,31 @@ const CartPage = () => {
     }
   }
 
+  async function checkout() {
+    const orderItems = products.map((product) => {
+      return {
+        product: product.id,
+        quantity: product.quantity,
+      };
+    });
+
+    const orderTotalPrice = Math.ceil(totalPrice * 1.13) + 200;
+    const shippingAddress = user.address;
+    console.log({ orderItems, orderTotalPrice, shippingAddress });
+
+    try {
+      const response = await createOrder({
+        orderItems,
+        totalPrice: orderTotalPrice,
+        shippingAddress,
+      });
+      toast.success("Order created successfully!");
+      dispatch(clearCart());
+      router.push(`${ORDERS_ROUTE}`);
+    } catch (error) {
+      toast.error(error?.response?.data);
+    }
+  }
   return (
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
       <div className="mx-auto container px-4">
@@ -93,7 +124,7 @@ const CartPage = () => {
                       </div>
                       <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                         <Link
-                          href={`${PRODUCT_ROUTE }/${product.id}`}
+                          href={`${PRODUCT_ROUTE}/${product.id}`}
                           className="text-base font-medium text-gray-900 hover:underline dark:text-white"
                         >
                           {product.name}
@@ -453,12 +484,12 @@ const CartPage = () => {
                     </dd>
                   </dl>
                 </div>
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-primary/30 dark:hover:bg-blue-700 dark:focus:ring-primary"
+                <button
+                  onClick={() => checkout()}
+                  className="flex w-full cursor-pointer items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-primary/30 dark:hover:bg-blue-700 dark:focus:ring-primary"
                 >
                   Proceed to Checkout
-                </a>
+                </button>
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                     {" "}
