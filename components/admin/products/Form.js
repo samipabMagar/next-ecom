@@ -73,7 +73,7 @@ const Form = ({ product }) => {
     } catch (error) {
       setLoading(false);
       toast.error(error.response?.data?.message || "Failed to add product");
-    } finally {
+    } finally {x+
       setLoading(false);
     }
   };

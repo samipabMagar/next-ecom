@@ -1,6 +1,6 @@
 "use client";
 
-import { ADMIN_DASHBOARD_ROUTE, LOGIN_ROUTE } from "@/constants/routes";
+import { ADMIN_DASHBOARD_ROUTE, LOGIN_ROUTE, ORDERS_ROUTE } from "@/constants/routes";
 import { logout } from "@/redux/auth/authSlice";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -35,6 +35,12 @@ const User = () => {
               href={ADMIN_DASHBOARD_ROUTE}
             >
               Dashboard
+            </Link>
+            <Link
+              className="hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 px-2 py-1 w-full text-gray-700"
+              href={ORDERS_ROUTE}
+            >
+         Orders
             </Link>
             <Link
               className="hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 px-2 py-1 w-full text-gray-700"
