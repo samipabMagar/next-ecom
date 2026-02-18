@@ -14,3 +14,13 @@ export const cancelOrder = async(id) => {
 
     return response.data;
 }
+
+export const payViaKhalti = async(orderId) => {
+    const response = await api.post(`api/orders/${orderId}/payment/khalti`);
+    return response.data;
+}
+
+export const confirmPayment = async(orderId, status) => {
+    const response = await api.put(`/api/orders/${orderId}/confirm-payment`, {status});
+    return response.data;
+}

@@ -8,6 +8,7 @@ import {
   ORDER_STATUS_CANCELLED,
   ORDER_STATUS_PENDING,
 } from "@/constants/order";
+import PayViaKhalti from "./PayViaKhalti";
 
 const OrderCard = ({ order }) => {
   const isProductAvailable = order.orderItems.some((item) => item.product);
@@ -117,9 +118,7 @@ const OrderCard = ({ order }) => {
           ) : null}
           {order.status === ORDER_STATUS_PENDING ? (
             <div className="pl-6 py-3 max-lg:text-center flex items-center gap-3">
-              <button className="bg-purple-900 hover:bg-violet-900 text-white rounded-md px-4 py-2 cursor-pointer">
-                Pay Via Khalti
-              </button>
+              <PayViaKhalti id={order._id}/>
               <button className="bg-blue-700 hover:bg-blue-800 text-white rounded-md px-4 py-2 cursor-pointer">
                 Pay Via Stripe
               </button>
