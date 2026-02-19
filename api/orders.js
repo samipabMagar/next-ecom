@@ -24,3 +24,8 @@ export const confirmPayment = async(orderId, status) => {
     const response = await api.put(`/api/orders/${orderId}/confirm-payment`, {status});
     return response.data;
 }
+
+export const payViaCash = async(orderId) => {
+    const response = await api.post(`api/orders/${orderId}/payment/cash`);
+    return response.data;
+}

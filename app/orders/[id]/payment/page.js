@@ -22,7 +22,7 @@ const OrdersPayment = () => {
       })
       .finally(() => {
         router.push(ORDERS_ROUTE);
-      });
+      },[]);
   });
   return (
     <div className="py-24 flex items-center justify-center">
