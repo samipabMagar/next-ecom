@@ -11,6 +11,7 @@ import {
 } from "@/constants/order";
 import PayViaKhalti from "./PayViaKhalti";
 import CashOnDelivery from "./CashOnDelivery";
+import PayViaStripe from "./PayViaStripe";
 
 const OrderCard = ({ order }) => {
   const isProductAvailable = order.orderItems.some((item) => item.product);
@@ -121,9 +122,7 @@ const OrderCard = ({ order }) => {
           {order.status === ORDER_STATUS_PENDING ? (
             <div className="pl-6 py-3 max-lg:text-center flex items-center gap-3">
               <PayViaKhalti id={order._id}/>
-              <button className="bg-blue-700 hover:bg-blue-800 text-white rounded-md px-4 py-2 cursor-pointer">
-                Pay Via Stripe
-              </button>
+              <PayViaStripe id={order._id}/>
              <CashOnDelivery id={order._id}/>
             </div>
           ) : null}

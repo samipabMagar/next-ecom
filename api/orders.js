@@ -29,3 +29,8 @@ export const payViaCash = async(orderId) => {
     const response = await api.post(`api/orders/${orderId}/payment/cash`);
     return response.data;
 }
+
+export const payViaStripe = async(orderId) => {
+    const response = await api.post(`/api/orders/${orderId}/payment/stripe`);
+    return response.data;
+}
