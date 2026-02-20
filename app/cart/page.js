@@ -15,6 +15,7 @@ import {
 import { createOrder } from "@/api/orders";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { ORDER_STATUS_PENDING } from "@/constants/order";
 
 const CartPage = () => {
   const { products, totalPrice } = useSelector((state) => state.cartReducer);
@@ -49,7 +50,7 @@ const CartPage = () => {
       });
       toast.success("Order created successfully!");
       dispatch(clearCart());
-      router.push(`${ORDERS_ROUTE}`);
+      router.push(`${ORDERS_ROUTE}?status=${ORDER_STATUS_PENDING}`);
     } catch (error) {
       toast.error(error?.response?.data);
     }

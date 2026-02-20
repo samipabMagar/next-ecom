@@ -8,7 +8,7 @@ import {
   ORDER_STATUS_PENDING,
   ORDER_STATUS_SHIPPED,
 } from "@/constants/order";
-import { updateStatus } from "@/api/orders";
+import { getAllOrders, updateStatus } from "@/api/orders";
 import { toast } from "react-toastify";
 
 const OrderAction = ({ id, status }) => {

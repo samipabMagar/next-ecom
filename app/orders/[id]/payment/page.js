@@ -1,6 +1,7 @@
 "use client";
 import { confirmPayment } from "@/api/orders";
 import Spinner from "@/components/Spinner";
+import { ORDER_STATUS_CONFIRMED } from "@/constants/order";
 import { ORDERS_ROUTE } from "@/constants/routes";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
@@ -16,13 +17,12 @@ const OrdersPayment = () => {
     confirmPayment(id, status)
       .then(() => {
         toast.success("Payment status updated successfully");
+        router.replace(`${ORDERS_ROUTE}?status=${ORDER_STATUS_CONFIRMED}`);
       })
       .catch((error) => {
         console.log("Error confirming payment:", error);
       })
-      .finally(() => {
-        router.push(ORDERS_ROUTE);
-      },[]);
+     
   });
   return (
     <div className="py-24 flex items-center justify-center">

@@ -12,8 +12,10 @@ import {
 import PayViaKhalti from "./PayViaKhalti";
 import CashOnDelivery from "./CashOnDelivery";
 import PayViaStripe from "./PayViaStripe";
+import { useRouter } from "next/navigation";
 
 const OrderCard = ({ order }) => {
+  const router = useRouter();
   const isProductAvailable = order.orderItems.some((item) => item.product);
 
   if (!isProductAvailable) return;
@@ -23,6 +25,7 @@ const OrderCard = ({ order }) => {
       cancelOrder(order._id)
         .then(() => {
           toast.success("Order cancelled.");
+          router.push(`?status=${ORDER_STATUS_CANCELLED}`);
         })
         .catch((error) => {
           console.log(error);

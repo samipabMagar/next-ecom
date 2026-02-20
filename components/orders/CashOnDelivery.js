@@ -1,8 +1,11 @@
 import { payViaCash } from "@/api/orders";
+import { ORDER_STATUS_CONFIRMED } from "@/constants/order";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
 const CashOnDelivery = ({ id }) => {
+  const router = useRouter();
   const confirmOrder = async () => {
     if (
       confirm("Are you sure you want to place the order with Cash on Delivery?")
@@ -10,6 +13,7 @@ const CashOnDelivery = ({ id }) => {
       try {
         await payViaCash(id);
         toast.success("Order placed successfully with Cash on Delivery.");
+        router.push(`?status=${ORDER_STATUS_CONFIRMED}`)
       } catch (error) {
         toast.error("Failed to place order. Please try again.");
       }

@@ -84,7 +84,7 @@ const OrdersTable = ({ loading, orders }) => {
                             Product unavailable
                           </span>
                         )}
-                        (x{item.quantity})
+                        (x{order.quantity})
                       </p>
                     ))}
                   </td>

@@ -5,6 +5,7 @@ import Spinner from "../Spinner";
 
 const PayViaKhalti = ({id}) => {
   const [loading, setLoading] = useState(false);
+  
 
   const handlePayment = () => {
     setLoading(true);
