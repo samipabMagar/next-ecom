@@ -34,3 +34,20 @@ export const payViaStripe = async(orderId) => {
     const response = await api.post(`/api/orders/${orderId}/payment/stripe`);
     return response.data;
 }
+
+export const getAllOrders = async(status) => {
+    let url =  "/api/orders";
+    if(status) {
+        url += `?status=${status}`;
+    }
+    const response = await api.get(url);
+    return response.data;
+}
+
+export const updateStatus = async (id, status) => {
+  const response = await api.put(`/api/orders/${id}/status`, {
+    status,
+  });
+
+  return response.data;
+};
