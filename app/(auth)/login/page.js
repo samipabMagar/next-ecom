@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { REGISTER_ROUTE } from "@/constants/routes";
+import { FORGOT_PASSWORD_ROUTE, REGISTER_ROUTE } from "@/constants/routes";
 import Logo from "@/components/Logo";
 import { useForm } from "react-hook-form";
 import { login } from "@/api/auth";
@@ -15,7 +15,7 @@ const page = () => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
 
-  const {loading, user, error} = useSelector((state) => state.authReducer);
+  const { loading, user, error } = useSelector((state) => state.authReducer);
 
   const submitForm = async (data) => {
     dispatch(loginUser(data));
@@ -23,13 +23,15 @@ const page = () => {
 
   useEffect(() => {
     toast.error(error);
-  },[error])
+  }, [error]);
   return (
     <div className="flex  items-center justify-center w-full px-4">
       <div className="flex w-full flex-col max-w-96 gap-5">
         <Logo />
         <form onSubmit={handleSubmit(submitForm)}>
-          <h2 className="text-4xl font-medium text-gray-900 dark:text-gray-300">Sign in</h2>
+          <h2 className="text-4xl font-medium text-gray-900 dark:text-gray-300">
+            Sign in
+          </h2>
           <p className="mt-4 text-base text-gray-500/90">
             Please enter email and password to access.
           </p>
@@ -46,8 +48,15 @@ const page = () => {
           </div>
           <div className="mt-6">
             <label className="font-medium">Password</label>
-           <PasswordInput {...register("password")}/>
+            <PasswordInput {...register("password")} />
           </div>
+          <Link
+            className="p-2 inline-block text-sm text-primary hover:underline"
+            href={FORGOT_PASSWORD_ROUTE}
+          >
+            Forgot password
+          </Link>
+
           <button
             type="submit"
             disabled={loading}

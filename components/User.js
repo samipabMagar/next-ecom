@@ -1,5 +1,6 @@
 "use client";
 
+import { ORDER_STATUS_PENDING } from "@/constants/order";
 import { ADMIN_DASHBOARD_ROUTE, LOGIN_ROUTE, ORDERS_ROUTE } from "@/constants/routes";
 import { logout } from "@/redux/auth/authSlice";
 import Link from "next/link";
@@ -38,7 +39,7 @@ const User = () => {
             </Link>
             <Link
               className="hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 px-2 py-1 w-full text-gray-700"
-              href={ORDERS_ROUTE}
+              href={`${ORDERS_ROUTE}?status=${ORDER_STATUS_PENDING}`}
             >
          Orders
             </Link>
