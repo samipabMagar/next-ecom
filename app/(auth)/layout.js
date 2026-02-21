@@ -12,7 +12,7 @@ const AuthLayout = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      router.push(HOME_ROUTE);
+      router.replace(HOME_ROUTE);
     }
   }, [user]);
   if (user) {

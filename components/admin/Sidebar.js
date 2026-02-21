@@ -3,15 +3,22 @@ import sidebarLinks from "@/constants/sidebarLinks";
 import Link from "next/link";
 import { FaSignOutAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/auth/authSlice";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { user } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
 
   return (
     <aside className="pt-12  fixed top-0 left-0 z-40 w-70 h-full transition-transform -translate-x-full sm:translate-x-0">
       <div className="h-full sm:pl-10 pr-5 py-4 overflow-y-auto shadow dark:bg-gray-950">
         <ul className="space-y-2 font-medium">
           {sidebarLinks.map((item) => {
+            if (!item.roles.some((role) => user.roles.includes(role))) {
+              return null;
+            }
             const isActive = pathname.startsWith(item.route);
 
             return (
@@ -27,7 +34,7 @@ const Sidebar = () => {
             );
           })}
           <li>
-            <button className="gap-3 flex items-center justify-center px-2 py-1.5 w-full rounded-md bg-red-600 hover:bg-red-700 text-white">
+            <button onClick={()=> dispatch(logout())} className="gap-3 cursor-pointer flex items-center justify-center px-2 py-1.5 w-full rounded-md bg-red-600 hover:bg-red-700 text-white">
               <FaSignOutAlt />
               <span>Logout</span>
             </button>
