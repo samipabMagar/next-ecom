@@ -1,7 +1,7 @@
 "use client";
 
 import { updateUser } from "@/api/user";
-
+import ProfileImage from "@/components/profile/Image";
 import Spinner from "@/components/Spinner";
 import { setUser } from "@/redux/auth/authSlice";
 import { useState } from "react";
@@ -57,7 +57,7 @@ const ProfilePage = () => {
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           General Information
         </h2>
-
+    <ProfileImage/>
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div className="sm:col-span-2">
