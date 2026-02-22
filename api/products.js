@@ -30,3 +30,13 @@ export const deleteProduct = async (id) => {
 
   return response.data;
 };
+
+export const getProductBrands = async() => {
+  const response = await axios.get(`${config.apiUrl}/api/products/brands`);
+  return response.data;
+}
+
+export const getProductCategories = async() => {
+  const response = await axios.get(`${config.apiUrl}/api/products/categories`);
+  return response.data;
+}

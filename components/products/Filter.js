@@ -8,7 +8,7 @@ const DEFAULT_SORT = JSON.stringify({
 });
 const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 10000000;
-const ProductFilter = () => {
+const ProductFilter = ({ productBrands, productCategories }) => {
   const [sort, setSort] = useState(DEFAULT_SORT);
   const [minPrice, setMinPrice] = useState(DEFAULT_MIN_PRICE);
   const [maxPrice, setMaxPrice] = useState(DEFAULT_MAX_PRICE);
@@ -83,7 +83,9 @@ const ProductFilter = () => {
       </div>
       <div>
         <h4 className="mb-1 mt-2">Price Range:</h4>
-        <label className="text-xs text-gray-700 dark:text-white">Minimum price:</label>
+        <label className="text-xs text-gray-700 dark:text-white">
+          Minimum price:
+        </label>
         <input
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
@@ -91,7 +93,9 @@ const ProductFilter = () => {
           className="outline-0 dark:text-white w-full text-gray-800 border-gray-300 border rounded-md my-1 px-2 py-1"
           name="min"
         />
-        <label className="text-xs dark:text-white text-gray-700">Maximum price:</label>
+        <label className="text-xs dark:text-white text-gray-700">
+          Maximum price:
+        </label>
         <input
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
@@ -109,43 +113,35 @@ const ProductFilter = () => {
           className="text-gray-800 dark:text-white dark:bg-gray-800 outline-0 rounded-md w-full border-gray-300 border px-2 py-1"
           name="sort"
         >
-          <option  value={""}>Select category</option>
-          <option  value={"Smartphones"}>Smartphones</option>
-          <option  value={"Laptops"}>Laptops</option>
-          <option  value={"Smartwatches"}>Smartwatches</option>
+          <option value={""}>Select category</option>
+          {productCategories?.map((cat) => {
+            return (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            );
+          })}
         </select>
       </div>
 
       <div>
         <h4 className="font-medium mt-1 mb-1">Brands</h4>
 
-        <div className="flex gap-2 items-center mb-2">
-          <input
-            name="Apple"
-            checked={brands.includes("Apple")}
-            onChange={() => handleBrandChange("Apple")}
-            type="checkbox"
-          />
-          <label className="text-sm dark:text-white text-gray-700">Apple</label>
-        </div>
-        <div className="flex gap-2 items-center mb-2">
-          <input
-            checked={brands.includes("Google")}
-            onChange={() => handleBrandChange("Google")}
-            name="Google"
-            type="checkbox"
-          />
-          <label className="text-sm dark:text-white text-gray-700">Google</label>
-        </div>
-        <div className="flex gap-2 items-center mb-2">
-          <input
-            checked={brands.includes("Samsung")}
-            onChange={() => handleBrandChange("Samsung")}
-            name="Samsung"
-            type="checkbox"
-          />
-          <label className="text-sm dark:text-white text-gray-700">Samsung</label>
-        </div>
+        {productBrands?.map((brand) => {
+          return (
+            <div key={brand} className="flex gap-2 items-center mb-2">
+              <input
+                id={brand}
+                checked={brands.includes(brand)}
+                onChange={() => handleBrandChange(brand)}
+                type="checkbox"
+              />
+              <label htmlFor={brand} className="text-sm dark:text-white text-gray-700">
+                {brand}
+              </label>
+            </div>
+          );
+        })}
       </div>
 
       <div>
